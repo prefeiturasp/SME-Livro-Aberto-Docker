@@ -1,0 +1,3 @@
+[submodule "SME-Livro-Aberto"]
+	path = SME-Livro-Aberto
+	url = https://github.com/prefeiturasp/SME-Livro-Aberto.git
