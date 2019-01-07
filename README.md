@@ -15,6 +15,13 @@ This will create 3 containers, configure their network and let them run:
 - Nginx, our reverse proxy to get data
 - APP, served by a http server known as [gunicorn](https://gunicorn.org/)
 
+# How to clone?
+As this has a submodule, you must clone using the recursive flag:
+```
+$ git clone --recurse-submodules ssh://git@git.dapp.cloud.fgv.br:777/source/ot-dockerfile-sme-livro-aberto.git
+
+```
+
 # How to install?
 TL;DR: 
 ```
