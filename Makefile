@@ -3,7 +3,7 @@
 
 COMMAND = docker-compose run --rm livro-aberto-djangoapp /bin/bash -c
 
-all: setup build install migrate run ## Setup and Install the Livro-Aberto APP using Docker.
+all: update setup build install migrate run ## Setup and Install the Livro-Aberto APP using Docker.
 
 setup: ## Setup the parameters and environment files.
 	sh config/setup.sh
@@ -20,6 +20,9 @@ run: ## Start the Containers generated in detached mode
 stop:  ## Stop the Containters generated
 	docker-compose down
 
+update: ## Update the submodule fetching from github
+	git submodule update --init --remote --force
+	
 migrate: ## Run the database migration
 	$(COMMAND) 'cd /opt/services/livro-aberto/src; pipenv run python manage.py migrate; pipenv run python manage.py loaddata data/181228_everything.json;'
 
