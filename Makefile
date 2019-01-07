@@ -24,7 +24,7 @@ update: ## Update the submodule fetching from github
 	git submodule update --init --remote --force
 	
 migrate: ## Run the database migration
-	$(COMMAND) 'cd /opt/services/livro-aberto/src; pipenv run python manage.py migrate; pipenv run python manage.py loaddata data/181228_everything.json;'
+	$(COMMAND) 'sleep 15; cd /opt/services/livro-aberto/src; pipenv run python manage.py migrate; pipenv run python manage.py loaddata data/181228_everything.json;'
 
 clean: ## Clean all the images, networks and containers unused.
 	docker system prune -a
