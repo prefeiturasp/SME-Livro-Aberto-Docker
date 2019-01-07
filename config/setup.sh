@@ -64,7 +64,6 @@ cat << EOF > config/django/.env
 SECRET_KEY='$(LC_ALL=C tr -dc 'a-zA-Z0-9' </dev/urandom | head -c 48; echo)'
 DEBUG=False
 ALLOWED_HOSTS='*'
-STATICFILES_STORAGE='django.contrib.staticfiles.storage.StaticFilesStorage'
 DATABASE_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@livro-aberto-db:5432/${POSTGRES_DB}
 EOF
 
