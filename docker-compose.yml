@@ -1,0 +1,48 @@
+version: '3.3'
+
+services:
+  # postgres database
+  livro-aberto-db:
+    image: postgres:${POSTGRES_TAG:-10-alpine}
+    volumes:
+      - livro-aberto-db-volume:/var/lib/postgresql/data
+    env_file:
+      - ./config/db/postgres_env
+    networks:
+      - livro-aberto-db-network
+  
+  # web container with django and gunicorn
+  livro-aberto-djangoapp:
+    build: .
+    # environment:
+    #   - DJANGO_SETTINGS_MODULE=core.settings.base
+    volumes:
+      # - .:/opt/services/livro-aberto/src
+      - livro-aberto-djangoapp-volume:/opt/services/livro-aberto/src
+    networks:
+      - livro-aberto-db-network
+      - livro-aberto-nginx-network
+    depends_on:
+      - livro-aberto-db
+
+  # reverse proxy container (nginx)
+  livro-aberto-nginx:
+    image: nginx:${NGINX_TAG:-1-alpine}
+    ports:
+      - "${HOST_WEB_PORT:-80}:80"
+    volumes:
+      - ./config/nginx/conf.d:/etc/nginx/conf.d
+    networks:
+      - livro-aberto-nginx-network
+    depends_on:
+      - livro-aberto-djangoapp
+
+networks:
+  livro-aberto-db-network:
+    driver: bridge
+  livro-aberto-nginx-network:
+    driver: bridge
+
+volumes:
+  livro-aberto-db-volume:
+  livro-aberto-djangoapp-volume:
