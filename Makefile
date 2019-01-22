@@ -22,6 +22,7 @@ stop:  ## Stop the Containters generated
 
 update: ## Update the submodule fetching from github
 	git submodule update --init --remote --force
+	make build stop run
 	
 migrate: ## Run the database migration
 	$(COMMAND) 'sleep 15; cd /opt/services/livro-aberto/src; pipenv run python manage.py migrate; pipenv run python manage.py loaddata data/181228_everything.json;'
