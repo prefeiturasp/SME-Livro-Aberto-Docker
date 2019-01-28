@@ -20,6 +20,8 @@ run: ## Start the Containers generated in detached mode
 stop:  ## Stop the Containers generated
 	docker-compose stop
 
+remove: ## Remove the Containers generated and the volumes - WARNING: THIS OPTION WILL REMOVE THE DATABASE
+	docker-compose down -v
 
 update-submodule: ## Update the submodule fetching from github
 	git submodule update --init --remote --force
