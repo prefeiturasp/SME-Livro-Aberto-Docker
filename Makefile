@@ -17,8 +17,9 @@ install: ## Install and Configure the Containers
 run: ## Start the Containers generated in detached mode
 	docker-compose up --detach
 
-stop:  ## Stop the Containters generated
-	docker-compose down
+stop:  ## Stop the Containers generated
+	docker-compose stop
+
 
 update-submodule: ## Update the submodule fetching from github
 	git submodule update --init --remote --force
