@@ -36,6 +36,8 @@ migrate: ## Run the database migration
 load-data: ## Load the data necessary for tests
 	$(COMMAND) 'sleep 15; cd /opt/services/livro-aberto/src; pipenv run python manage.py loaddata data/181228_everything.json;'
 
+generate-executions: ## Import data from tables orcamento e empenho and apply the fromto script.
+	$(COMMAND) 'sleep 15; cd /opt/services/livro-aberto/src; pipenv run python manage.py runscript generate_execucoes;'
 
 clean: ## Clean all the images, networks and containers unused - WARNING: THIS OPTION WILL REMOVE ALL UNUSED IMAGES, NETWORKS AND CONTAINERS.
 	docker system prune -a
