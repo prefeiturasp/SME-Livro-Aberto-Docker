@@ -3,7 +3,7 @@
 
 COMMAND = docker-compose run --rm livro-aberto-djangoapp /bin/bash -c
 
-all: update-submodule setup build install migrate run ## Setup and Install the Livro-Aberto APP using Docker.
+all: update-submodule setup build install migrate generate-executions run ## Setup and Install the Livro-Aberto APP using Docker.
 
 setup: ## Setup the parameters and environment files.
 	sh config/setup.sh
@@ -17,8 +17,11 @@ install: ## Install and Configure the Containers
 run: ## Start the Containers generated in detached mode
 	docker-compose up --detach
 
-stop:  ## Stop the Containters generated
-	docker-compose down
+stop:  ## Stop the Containers generated
+	docker-compose stop
+
+remove: ## Remove the Containers generated and the volumes - WARNING: THIS OPTION WILL REMOVE THE DATABASE
+	docker-compose down -v
 
 update-submodule: ## Update the submodule fetching from github
 	git submodule update --init --remote --force
@@ -28,9 +31,15 @@ update: ## Update the submodule and send it to container
 	make build stop run
 	
 migrate: ## Run the database migration
-	$(COMMAND) 'sleep 15; cd /opt/services/livro-aberto/src; pipenv run python manage.py migrate; pipenv run python manage.py loaddata data/181228_everything.json;'
+	$(COMMAND) 'sleep 15; cd /opt/services/livro-aberto/src; pipenv run python manage.py migrate; pipenv run python manage.py loaddata data/fromto.json; pipenv run python manage.py loaddata data/minimo_legal_2014_2017.json;'
 
-clean: ## Clean all the images, networks and containers unused.
+load-data: ## Load the data necessary for tests
+	$(COMMAND) 'sleep 15; cd /opt/services/livro-aberto/src; pipenv run python manage.py loaddata data/181228_everything.json;'
+
+generate-executions: ## Import data from tables orcamento e empenho and apply the fromto script.
+	$(COMMAND) 'sleep 15; cd /opt/services/livro-aberto/src; pipenv run python manage.py runscript generate_execucoes;'
+
+clean: ## Clean all the images, networks and containers unused - WARNING: THIS OPTION WILL REMOVE ALL UNUSED IMAGES, NETWORKS AND CONTAINERS.
 	docker system prune -a
 
 help:
