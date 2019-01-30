@@ -42,8 +42,16 @@ services:
 networks:
   livro-aberto-db-network:
     driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.0.2.0/28
   livro-aberto-nginx-network:
     driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.0.2.16/28
 
 volumes:
   livro-aberto-db-volume:
