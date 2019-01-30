@@ -16,6 +16,9 @@ echo "****************************************************"
 read -p "Enter the Postgres Version TAG (Default: 10-alpine):" POSTGRES_TAG
 POSTGRES_TAG=${POSTGRES_TAG:-'10-alpine'}
 
+read -p "Enter the Postgres Port (Default: 5432):" POSTGRES_PORT
+POSTGRES_PORT=${POSTGRES_PORT:-'5432'}
+
 read -p "Enter the NGINX Version TAG (Default: 1-alpine):" NGINX_TAG
 NGINX_TAG=${NGINX_TAG:-'1-alpine'}
 
