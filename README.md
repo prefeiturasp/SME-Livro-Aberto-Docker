@@ -18,7 +18,7 @@ This will create 3 containers, configure their network and let them run:
 # How to clone?
 As this has a submodule, you must clone using the recursive flag:
 ```
-$ git clone --recurse-submodules ssh://git@git.dapp.cloud.fgv.br:777/source/ot-dockerfile-sme-livro-aberto.git
+$ git clone --recurse-submodules git@github.com:prefeiturasp/SME-Livro-Aberto-Docker.git
 
 ```
 
