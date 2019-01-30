@@ -4,6 +4,8 @@ services:
   # postgres database
   livro-aberto-db:
     image: postgres:${POSTGRES_TAG:-10-alpine}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
     volumes:
       - livro-aberto-db-volume:/var/lib/postgresql/data
     env_file:
@@ -40,8 +42,16 @@ services:
 networks:
   livro-aberto-db-network:
     driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.0.2.0/28
   livro-aberto-nginx-network:
     driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.0.2.16/28
 
 volumes:
   livro-aberto-db-volume:
