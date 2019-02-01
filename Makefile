@@ -20,6 +20,9 @@ run: ## Start the Containers generated in detached mode
 stop:  ## Stop the Containers generated
 	docker-compose stop
 
+down: ## Remove the Containers generated and the networks
+	docker-compose down
+
 remove: ## Remove the Containers generated and the volumes - WARNING: THIS OPTION WILL REMOVE THE DATABASE
 	docker-compose down -v
 
