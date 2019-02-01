@@ -31,7 +31,7 @@ update-submodule: ## Update the submodule fetching from github
 
 update: ## Update the submodule and send it to container
 	git submodule update --init --remote --force
-	make build stop run
+	make down build install migrate generate-executions run
 	
 migrate: ## Run the database migration
 	$(COMMAND) 'sleep 15; cd /opt/services/livro-aberto/src; pipenv run python manage.py migrate; pipenv run python manage.py loaddata data/fromto.json; pipenv run python manage.py loaddata data/minimo_legal_2014_2017.json;'
