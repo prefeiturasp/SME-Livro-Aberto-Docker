@@ -20,7 +20,7 @@ services:
     #   - DJANGO_SETTINGS_MODULE=core.settings.base
     volumes:
       # - .:/opt/services/livro-aberto/src
-      - livro-aberto-djangoapp-volume:/opt/services/livro-aberto/src
+      # - livro-aberto-djangoapp-volume:/opt/services/livro-aberto/src
     networks:
       - livro-aberto-db-network
       - livro-aberto-nginx-network
