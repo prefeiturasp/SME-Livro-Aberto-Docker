@@ -20,7 +20,7 @@ services:
     #   - DJANGO_SETTINGS_MODULE=core.settings.base
     volumes:
       # - .:/opt/services/livro-aberto/src
-      - livro-aberto-djangoapp-volume:/opt/services/livro-aberto/src
+      # - livro-aberto-djangoapp-volume:/opt/services/livro-aberto/src
     networks:
       - livro-aberto-db-network
       - livro-aberto-nginx-network
@@ -31,7 +31,7 @@ services:
   livro-aberto-nginx:
     image: nginx:${NGINX_TAG:-1-alpine}
     ports:
-      - "${HOST_WEB_PORT:-80}:80"
+      - "${HOST_WEB_PORT:-8000}:80"
     volumes:
       - ./config/nginx/conf.d:/etc/nginx/conf.d
     networks:
