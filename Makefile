@@ -3,7 +3,7 @@
 
 COMMAND = docker-compose run --rm livro-aberto-djangoapp /bin/bash -c
 
-all: update-submodule setup build install first-migration generate-executions run ## Setup and Install the Livro-Aberto APP using Docker.
+all: update-submodule setup build install first-migration generate-executions create-super-user run ## Setup and Install the Livro-Aberto APP using Docker.
 
 setup: ## Setup the parameters and environment files.
 	/bin/bash config/setup.sh
@@ -35,6 +35,9 @@ update: ## Update the submodule and send it to container
 	
 migrate: ## Run the database migration
 	$(COMMAND) 'sleep 15; cd /opt/services/livro-aberto/src; pipenv run python manage.py migrate;'
+
+create-super-user: ## Create the super user to access django-admin
+	$(COMMAND) 'sleep 15; cd /opt/services/livro-aberto/src; pipenv run python manage.py createsuperuser;'
 
 first-migration: ## Run the database migration - WARNING: THIS SHOULD BE USED ONLY ON THE FIRST TIME YOU'RE CREATING THE DATABASE
 	$(COMMAND) 'sleep 15; cd /opt/services/livro-aberto/src; pipenv run python manage.py migrate; pipenv run python manage.py loaddata data/fromto.json; pipenv run python manage.py loaddata data/minimo_legal_2014_2017.json; pipenv run python manage.py loaddata data/gnds.json;'
