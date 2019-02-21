@@ -9,7 +9,7 @@ setup: ## Setup the parameters and environment files.
 	sh config/setup.sh
 
 build: ## Build the Django APP Container from the Dockerfile
-	docker-compose --project-name livro-aberto-djangoapp build
+	docker-compose --project-name livro-aberto-djangoapp build --force-rm --no-cache
 
 install: ## Install and Configure the Containers
 	docker-compose up --no-start
@@ -21,10 +21,10 @@ stop:  ## Stop the Containers generated
 	docker-compose stop
 
 down: ## Remove the Containers generated and the networks
-	docker-compose down
+	docker-compose down --rmi 'all' --remove-orphans
 
 remove: ## Remove the Containers generated and the volumes - WARNING: THIS OPTION WILL REMOVE THE DATABASE
-	docker-compose down -v
+	docker-compose down -v --rmi 'all' --remove-orphans
 
 update-submodule: ## Update the submodule fetching from github
 	git submodule update --init --remote --force
