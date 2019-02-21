@@ -28,6 +28,7 @@ HOST_PORT=${HOST_PORT:-'80'}
 echo "Generating environment file..."
 cat << EOF > .env
 POSTGRES_TAG=${POSTGRES_TAG}
+POSTGRES_PORT=${POSTGRES_PORT}
 NGINX_TAG=${NGINX_TAG}
 HOST_WEB_PORT=${HOST_PORT}
 EOF
