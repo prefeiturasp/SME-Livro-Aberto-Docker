@@ -22,8 +22,8 @@ POSTGRES_PORT=${POSTGRES_PORT:-'5432'}
 read -p "Enter the NGINX Version TAG (Default: 1-alpine):" NGINX_TAG
 NGINX_TAG=${NGINX_TAG:-'1-alpine'}
 
-read -p "Enter the Host Web Port (Default: 80):" HOST_PORT
-HOST_PORT=${HOST_PORT:-'80'}
+read -p "Enter the Host Web Port (Default: 8000):" HOST_PORT
+HOST_PORT=${HOST_PORT:-'8000'}
 
 echo "Generating environment file..."
 cat << EOF > .env
