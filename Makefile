@@ -5,6 +5,12 @@ COMMAND = docker-compose run --rm livro-aberto-djangoapp /bin/bash -c
 
 all: update-submodule setup build install first-migration generate-executions create-super-user run ## Setup and Install the Livro-Aberto APP using Docker.
 
+step1: update-submodule setup build install first-migration
+
+step2: #supposed to load data from dumps manually
+
+step3: create-super-user load-data generate-executions run
+
 setup: ## Setup the parameters and environment files.
 	/bin/bash config/setup.sh
 
