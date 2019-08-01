@@ -62,6 +62,8 @@ echo "**             Configuring Django APP             **"
 echo "****************************************************"
 
 # Generating the django env file with the database url
+read -p "Provide the key to the API SOF: " PRODAM_KEY
+PRODAM_KEY=${PRODAM_KEY}
 
 echo "Generating django env file..."
 cat << EOF > config/django/.env
@@ -69,6 +71,7 @@ SECRET_KEY='$(LC_ALL=C tr -dc 'a-zA-Z0-9' </dev/urandom | head -c 48; echo)'
 DEBUG=False
 ALLOWED_HOSTS='*'
 DATABASE_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@livro-aberto-db:5432/${POSTGRES_DB}
+PRODAM_KEY=${PRODAM_KEY}
 EOF
 
 echo ""
