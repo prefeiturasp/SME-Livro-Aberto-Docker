@@ -11,7 +11,7 @@ step2: #supposed to load data from dumps manually
 
 step3: create-super-user load-data generate-executions run
 
-step4: 
+step4: get-data-contracts
 
 setup: ## Setup the parameters and environment files.
 	/bin/bash config/setup.sh
