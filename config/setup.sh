@@ -25,16 +25,12 @@ NGINX_TAG=${NGINX_TAG:-'1-alpine'}
 read -p "Enter the Host Web Port (Default: 8000):" HOST_PORT
 HOST_PORT=${HOST_PORT:-'8000'}
 
-read -p "Provide the key to the API SOF: " PRODAM_KEY
-PRODAM_KEY=${PRODAM_KEY}
-
 echo "Generating environment file..."
 cat << EOF > .env
 POSTGRES_TAG=${POSTGRES_TAG}
 POSTGRES_PORT=${POSTGRES_PORT}
 NGINX_TAG=${NGINX_TAG}
 HOST_WEB_PORT=${HOST_PORT}
-PRODAM_KEY=${PRODAM_KEY}
 EOF
 echo ""
 echo ""
@@ -66,6 +62,8 @@ echo "**             Configuring Django APP             **"
 echo "****************************************************"
 
 # Generating the django env file with the database url
+read -p "Provide the key to the API SOF: " PRODAM_KEY
+PRODAM_KEY=${PRODAM_KEY}
 
 echo "Generating django env file..."
 cat << EOF > config/django/.env
@@ -73,6 +71,7 @@ SECRET_KEY='$(LC_ALL=C tr -dc 'a-zA-Z0-9' </dev/urandom | head -c 48; echo)'
 DEBUG=False
 ALLOWED_HOSTS='*'
 DATABASE_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@livro-aberto-db:5432/${POSTGRES_DB}
+PRODAM_KEY=${PRODAM_KEY}
 EOF
 
 echo ""
