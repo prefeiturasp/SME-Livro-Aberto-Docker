@@ -11,7 +11,7 @@ step2: #supposed to load data from dumps manually
 
 step3: create-super-user load-data generate-executions run
 
-step4: get-data-contracts
+step4: get-data-contracts generate-executions-contratos
 
 setup: ## Setup the parameters and environment files.
 	/bin/bash config/setup.sh
@@ -58,6 +58,9 @@ generate-executions: ## Import data from tables orcamento e empenho and apply th
 
 get-data-contracts: ## Get the contract data from API SOF based on contrato_raw_load table
 	$(COMMAND) 'sleep 15; cd /opt/services/livro-aberto/src; pipenv run python manage.py runscript get_empenhos_for_contratos_from_sof_api;'
+
+generate-executions-contratos: ## Cruza os dados das duas tabelas e aplica o de-para conforme script generate_execucoes_contratos
+	$(COMMAND) 'sleep 15; cd /opt/services/livro-aberto/src; pipenv run python manage.py runscript generate_execucoes_contratos;'
 
 clean: ## Clean all the images, networks and containers unused - WARNING: THIS OPTION WILL REMOVE ALL UNUSED IMAGES, NETWORKS AND CONTAINERS.
 	docker system prune -a
