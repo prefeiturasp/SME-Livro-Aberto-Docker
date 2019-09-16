@@ -18,8 +18,8 @@ services:
     build: .
     # environment:
     #   - DJANGO_SETTINGS_MODULE=core.settings.base
-    # volumes:
-      # - .:/opt/services/livro-aberto/src
+     volumes:
+       - ./data:/opt/services/livro-aberto/src/contratos/data
       # - livro-aberto-djangoapp-volume:/opt/services/livro-aberto/src
     networks:
       - livro-aberto-db-network
