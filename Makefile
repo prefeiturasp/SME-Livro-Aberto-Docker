@@ -9,7 +9,7 @@ all: update-submodule setup build install first-migration generate-executions cr
 
 step1: update-submodule setup build install first-migration
 
-step2: #supposed to load data from dumps manually
+step2: populate_row_load_with_dump
 
 step3: create-super-user load-data generate-executions run
 
