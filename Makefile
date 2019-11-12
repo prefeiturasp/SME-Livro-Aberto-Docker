@@ -9,7 +9,7 @@ all: update-submodule setup build install first-migration generate-executions cr
 
 step1: update-submodule setup build install first-migration
 
-step2: #supposed to load data from dumps manually
+step2: populate_row_load_with_dump
 
 step3: create-super-user load-data generate-executions run
 
@@ -63,6 +63,9 @@ get-data-contracts: ## Get the contract data from API SOF based on contrato_raw_
 
 generate-executions-contratos: ## Cruza os dados das duas tabelas e aplica o de-para conforme script generate_execucoes_contratos
 	$(COMMAND_ON_RUNNING_CONTAINER) 'sleep 15; cd /opt/services/livro-aberto/src; pipenv run python manage.py runscript generate_execucoes_contratos;'
+
+populate_row_load_with_dump: ## Load raw data with dump pre loaded on the main repository
+	$(COMMAND_ON_RUNNING_CONTAINER) 'sleep 15; cd /opt/services/livro-aberto/src; pipenv run python manage.py runscript populate_orcamento_empenhos_raw_load_with_dump;'
 
 clean: ## Clean all the images, networks and containers unused - WARNING: THIS OPTION WILL REMOVE ALL UNUSED IMAGES, NETWORKS AND CONTAINERS.
 	docker system prune -a
