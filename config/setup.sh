@@ -65,6 +65,9 @@ echo "****************************************************"
 read -p "Provide the key to the API SOF: " PRODAM_KEY
 PRODAM_KEY=${PRODAM_KEY}
 
+read -p "We use Sentry to get errors reported. Provide your Sentry key: " SENTRY_URL
+SENTRY_URL=${SENTRY_URL}
+
 echo "Generating django env file..."
 cat << EOF > config/django/.env
 SECRET_KEY='$(LC_ALL=C tr -dc 'a-zA-Z0-9' </dev/urandom | head -c 48; echo)'
@@ -72,6 +75,7 @@ DEBUG=False
 ALLOWED_HOSTS='*'
 DATABASE_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@livro-aberto-db:5432/${POSTGRES_DB}
 PRODAM_KEY=${PRODAM_KEY}
+SENTRY_URL=${SENTRY_URL}
 EOF
 
 echo ""
