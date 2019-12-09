@@ -15,6 +15,8 @@ step3: create-super-user load-data generate-executions run
 
 step4: get-data-contracts generate-executions-contratos
 
+step5: update_regionalizacao_data
+
 setup: ## Setup the parameters and environment files.
 	/bin/bash config/setup.sh
 
