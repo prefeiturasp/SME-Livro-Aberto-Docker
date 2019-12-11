@@ -51,8 +51,8 @@ The **Mosaico** and **Geologia** tools need a first load of raw data in order to
 $ make step2
 ```
 
-## Step 3 - Create Django`s admin user
-You will be prompted to set user and password to manage access on the Django Administrator Panel.
+## Step 3 - Create Django`s admin user, setup and load
+You will be prompted to set user and password to manage access on the Django Administrator Panel. After that, it will load pre-set data from contratos and generate the processed data to Contrato Social`s tool.
 ```
 $ make step3
 ```
