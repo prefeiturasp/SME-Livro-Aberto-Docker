@@ -68,10 +68,10 @@ PRODAM_KEY=${PRODAM_KEY}
 read -p "We use Sentry to get errors reported. If you want too, please, provide your Sentry key: " SENTRY_URL
 SENTRY_URL=${SENTRY_URL}
 
-read -p "Set the percentage limit for differences caused by any integration errors. Use 0,2 whitch means 20%: " LIMIT_PERCENT
-ORCADO_DIFFERENCE_PERCENT_LIMIT=${LIMIT_PERCENT}
-EMPENHADO_DIFFERENCE_PERCENT_LIMIT=${LIMIT_PERCENT}
-CONTRATOS_EMPENHOS_DIFFERENCE_PERCENT_LIMIT=${LIMIT_PERCENT}
+read -p "Set the percentage limit for differences caused by any integration errors. Use 0.2 that means 20%: " LIMIT_PERCENT
+ORCADO_DIFFERENCE_PERCENT_LIMIT=${LIMIT_PERCENT:-'0.2'}
+EMPENHADO_DIFFERENCE_PERCENT_LIMIT=${LIMIT_PERCENT:-'0.2'}
+CONTRATOS_EMPENHOS_DIFFERENCE_PERCENT_LIMIT=${LIMIT_PERCENT:-'0.2'}
 
 echo "Generating django env file..."
 cat << EOF > config/django/.env
