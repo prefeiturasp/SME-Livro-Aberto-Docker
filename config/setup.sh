@@ -65,8 +65,13 @@ echo "****************************************************"
 read -p "Provide the key to the API SOF: " PRODAM_KEY
 PRODAM_KEY=${PRODAM_KEY}
 
-read -p "We use Sentry to get errors reported. Provide your Sentry key: " SENTRY_URL
+read -p "We use Sentry to get errors reported. If you want too, please, provide your Sentry key: " SENTRY_URL
 SENTRY_URL=${SENTRY_URL}
+
+read -p "Set the percentage limit for differences caused by any integration errors. Use 0,2 whitch means 20%: " LIMIT_PERCENT
+ORCADO_DIFFERENCE_PERCENT_LIMIT=${LIMIT_PERCENT}
+EMPENHADO_DIFFERENCE_PERCENT_LIMIT=${LIMIT_PERCENT}
+CONTRATOS_EMPENHOS_DIFFERENCE_PERCENT_LIMIT=${LIMIT_PERCENT}
 
 echo "Generating django env file..."
 cat << EOF > config/django/.env
