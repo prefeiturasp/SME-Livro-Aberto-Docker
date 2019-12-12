@@ -15,6 +15,8 @@ step3: create-super-user load-data generate-executions run
 
 step4: get-data-contracts generate-executions-contratos
 
+step5: update_regionalizacao_data
+
 setup: ## Setup the parameters and environment files.
 	/bin/bash config/setup.sh
 
@@ -66,6 +68,9 @@ generate-executions-contratos: ## Cruza os dados das duas tabelas e aplica o de-
 
 populate_row_load_with_dump: ## Load raw data with dump pre loaded on the main repository
 	$(COMMAND) 'sleep 15; cd /opt/services/livro-aberto/src; pipenv run python manage.py runscript populate_orcamento_empenhos_raw_load_with_dump;'
+
+update_regionalizacao_data: ## Baixa dados das escolas na API EOL, aplica de-paras e gera as execuções
+	$(COMMAND) 'sleep 15; cd /opt/services/livro-aberto/src; pipenv run python manage.py runscript update_regionalizacao_data;'
 
 clean: ## Clean all the images, networks and containers unused - WARNING: THIS OPTION WILL REMOVE ALL UNUSED IMAGES, NETWORKS AND CONTAINERS.
 	docker system prune -a

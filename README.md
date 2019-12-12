@@ -37,31 +37,34 @@ $ make help
 ```
 
 ## Setting up
-Before everything, you must set up which versions you'll be using and configuring the database. To do so, use:
+All you need to do is to execute these steps in order to install, dump up pre-loaded data, download APIs data from EOL and SOF, generate files to download and create data views on database.
+
+## Step 1 - Database setup and Docker setup
+This first step is responsible for the creations of the infrastructure needed. You will be prompted for any configuration of each component.
 ```
-$ make setup
+$ make stepe1
 ```
 
-## Building up the APP
-As the APP uses [Django](https://www.djangoproject.com/), we need to build it from the `Dockerfile`:
+## Step 2 - Dump up pre-loaded data to the tools
+The **Mosaico** and **Geologia** tools need a first load of raw data in order to gain some time on the first run. 
 ```
-$ make build
-```
-
-## Installing
-Once you've build the APP, now we can proceed to create the other containers from the [docker hub](https://hub.docker.com/) images:
-```
-$ make install
+$ make step2
 ```
 
-## Migrating
-Now, we need to fill our database using:
+## Step 3 - Create Django`s admin user, setup and load
+You will be prompted to set user and password to manage access on the Django Administrator Panel. After that, it will load pre-set data from contratos and generate the processed data to Contrato Social`s tool.
 ```
-$ make migrate
+$ make step3
 ```
 
-## Let it run
-Finally, we can start our containers:
+## Step 4 - Contrato Social's setup and load
+This step is specific to the Contrato Social's tool, whicth is more slow, doe to the API SOF dependency.
 ```
-$ make run
+$ make step4
+```
+
+## Step 5 - Regionalização's setup and load
+This step load the schools from API EOL and apply the data associations between tables using spredsheets imported by admin.
+```
+$ make step5
 ```
