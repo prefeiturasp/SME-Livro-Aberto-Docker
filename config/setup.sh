@@ -64,9 +64,31 @@ echo "****************************************************"
 # Generating the django env file with the database url
 read -p "Provide the key to the API SOF: " PRODAM_KEY
 PRODAM_KEY=${PRODAM_KEY}
-
-read -p "We use Sentry to get errors reported. If you want too, please, provide your Sentry key: " SENTRY_URL
+echo " "
+echo "You could use Sentry or your oun mail server to get notified about exceptions."
+echo "ATTENTION: You are able to use ONE or ANOTHER"
+echo " "
+read -p "If you are NOT use SENTRY, leave blank. Or, provide your Sentry key: " SENTRY_URL
 SENTRY_URL=${SENTRY_URL}
+echo " "
+echo "If you are not using Sentry, provide these details of your mail server: "
+read -p "Provide your e-mail host: " EMAIL_HOST
+EMAIL_HOST=${EMAIL_HOST}
+
+read -p "Provide the port of your e-mail host: " EMAIL_PORT
+EMAIL_PORT=${EMAIL_PORT}
+
+read -p "Will you use encrypted connection TLS? (True/False): " EMAIL_USE_TLS
+EMAIL_USE_TLS=${EMAIL_USE_TLS}
+
+read -p "Provide the user host login to access the mail server: " EMAIL_HOST_USER
+EMAIL_HOST_USER=${EMAIL_HOST_USER}
+
+read -p "Provide the password for the user login mail server: " EMAIL_HOST_PASSWORD
+EMAIL_HOST_PASSWORD=${EMAIL_HOST_PASSWORD}
+
+read -p "Who will receive the e-mail notification? (e-mail address):" EMAIL_REPORT_RECIPIENT
+EMAIL_REPORT_RECIPIENT=${EMAIL_REPORT_RECIPIENT}
 
 read -p "Set the percentage limit for differences caused by any integration errors. Use 0.2 that means 20%: " LIMIT_PERCENT
 ORCADO_DIFFERENCE_PERCENT_LIMIT=${LIMIT_PERCENT:-'0.2'}
@@ -80,10 +102,16 @@ DEBUG=False
 ALLOWED_HOSTS='*'
 DATABASE_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@livro-aberto-db:5432/${POSTGRES_DB}
 PRODAM_KEY=${PRODAM_KEY}
-SENTRY_URL=${SENTRY_URL}
 ORCADO_DIFFERENCE_PERCENT_LIMIT=${LIMIT_PERCENT}
 EMPENHADO_DIFFERENCE_PERCENT_LIMIT=${LIMIT_PERCENT}
 CONTRATOS_EMPENHOS_DIFFERENCE_PERCENT_LIMIT=${LIMIT_PERCENT}
+SENTRY_URL=${SENTRY_URL}
+EMAIL_HOST=${EMAIL_HOST}
+EMAIL_PORT=${EMAIL_PORT}
+EMAIL_USE_TLS=${EMAIL_USE_TLS}
+EMAIL_HOST_USER=${EMAIL_HOST_USER}
+EMAIL_HOST_PASSWORD=${EMAIL_HOST_PASSWORD}
+EMAIL_REPORT_RECIPIENT=${EMAIL_REPORT_RECIPIENT}
 EOF
 
 echo ""
