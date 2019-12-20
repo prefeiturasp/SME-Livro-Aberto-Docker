@@ -11,7 +11,7 @@ COPY ./config/gunicorn/conf.py /opt/services/livro-aberto/src/gunicorn_conf.py
 # Configuring .env file
 WORKDIR /opt/services/livro-aberto/src
 
-RUN pip install pipenv && pipenv install
+RUN pip install pipenv && pipenv install --sequential
 
 EXPOSE 8000
 
