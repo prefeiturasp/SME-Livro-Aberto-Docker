@@ -2,7 +2,8 @@
 .DEFAULT_GOAL := help
 
 COMMAND = docker-compose run --rm livro-aberto-djangoapp /bin/bash -c
-COMMAND_ON_RUNNING_CONTAINER = docker exec -i -t $(docker ps -aqf "name=^sme-livro-aberto-docker_livro-aberto-djangoapp") /bin/bash -c
+CONTAINER_NAME="sme-livro-aberto-docker_livro-aberto-djangoapp_1"
+COMMAND_ON_RUNNING_CONTAINER = docker exec -i -t $(CONTAINER_NAME) /bin/bash -c
 
 
 all: update-submodule setup build install first-migration generate-executions create-super-user run ## Setup and Install the Livro-Aberto APP using Docker.
