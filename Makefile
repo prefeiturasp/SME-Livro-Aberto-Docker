@@ -8,11 +8,11 @@ COMMAND_ON_RUNNING_CONTAINER = docker exec -i -t $(CONTAINER_NAME) /bin/bash -c
 
 all: update-submodule setup build install first-migration generate-executions create-super-user run ## Setup and Install the Livro-Aberto APP using Docker.
 
-step1: update-submodule setup build install first-migration
+step1: update-submodule setup build install first-migration run
 
 step2: populate_row_load_with_dump
 
-step3: create-super-user load-data generate-executions run
+step3: create-super-user load-data generate-executions
 
 step4: get-data-contracts generate-executions-contratos
 
