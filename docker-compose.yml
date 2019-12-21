@@ -14,31 +14,31 @@ services:
       - livro-aberto-db-network
   
   # web container with django and gunicorn
-  livro-aberto-djangoapp:
+  livro-aberto-app:
     build: .
     # environment:
     #   - DJANGO_SETTINGS_MODULE=core.settings.base
     volumes:
        - ./data:/opt/services/livro-aberto/src/contratos/data
        - ./data:/opt/services/livro-aberto/scr/regionalizacao/data
-      # - livro-aberto-djangoapp-volume:/opt/services/livro-aberto/src
+      # - livro-aberto-app-volume:/opt/services/livro-aberto/src
     networks:
       - livro-aberto-db-network
-      - livro-aberto-nginx-network
+      - livro-aberto-nginx_new-network
     depends_on:
       - livro-aberto-db
 
   # reverse proxy container (nginx)
-  livro-aberto-nginx:
+  livro-aberto-nginx_new:
     image: nginx:${NGINX_TAG:-1-alpine}
     ports:
       - "${HOST_WEB_PORT:-8000}:80"
     volumes:
       - ./config/nginx/conf.d:/etc/nginx/conf.d
     networks:
-      - livro-aberto-nginx-network
+      - livro-aberto-nginx_new-network
     depends_on:
-      - livro-aberto-djangoapp
+      - livro-aberto-app
 
 networks:
   livro-aberto-db-network:
@@ -47,7 +47,7 @@ networks:
       driver: default
       config:
         - subnet: 10.0.2.0/28
-  livro-aberto-nginx-network:
+  livro-aberto-nginx_new-network:
     driver: bridge
     ipam:
       driver: default
@@ -56,4 +56,4 @@ networks:
 
 volumes:
   livro-aberto-db-volume:
-  livro-aberto-djangoapp-volume:
+  livro-aberto-app-volume:

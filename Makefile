@@ -1,8 +1,8 @@
 .PHONY: help clean
 .DEFAULT_GOAL := help
 
-COMMAND = docker-compose run --rm livro-aberto-djangoapp /bin/bash -c
-CONTAINER_NAME="sme-livro-aberto-docker_livro-aberto-djangoapp_1"
+COMMAND = docker-compose run --rm livro-aberto-app /bin/bash -c
+CONTAINER_NAME="sme-livro-aberto-docker_livro-aberto-app_1"
 COMMAND_ON_RUNNING_CONTAINER = docker exec -i -t $(CONTAINER_NAME) /bin/bash -c
 
 
@@ -22,7 +22,7 @@ setup: ## Setup the parameters and environment files.
 	/bin/bash config/setup.sh
 
 build: ## Build the Django APP Container from the Dockerfile
-	docker-compose --project-name livro-aberto-djangoapp build --force-rm --no-cache
+	docker-compose --project-name livro-aberto-app build --force-rm --no-cache
 
 install: ## Install and Configure the Containers
 	docker-compose up --no-start
