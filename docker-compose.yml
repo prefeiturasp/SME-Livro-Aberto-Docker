@@ -14,14 +14,14 @@ services:
       - livro-aberto-db-network
   
   # web container with django and gunicorn
-  livro-aberto-djangoapp:
+  livro-aberto-app:
     build: .
     # environment:
     #   - DJANGO_SETTINGS_MODULE=core.settings.base
     volumes:
        - ./data:/opt/services/livro-aberto/src/contratos/data
        - ./data:/opt/services/livro-aberto/scr/regionalizacao/data
-      # - livro-aberto-djangoapp-volume:/opt/services/livro-aberto/src
+      # - livro-aberto-app-volume:/opt/services/livro-aberto/src
     networks:
       - livro-aberto-db-network
       - livro-aberto-nginx-network
@@ -38,7 +38,7 @@ services:
     networks:
       - livro-aberto-nginx-network
     depends_on:
-      - livro-aberto-djangoapp
+      - livro-aberto-app
 
 networks:
   livro-aberto-db-network:
@@ -56,4 +56,4 @@ networks:
 
 volumes:
   livro-aberto-db-volume:
-  livro-aberto-djangoapp-volume:
+  livro-aberto-app-volume:
