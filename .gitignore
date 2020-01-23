@@ -1,2 +1,4 @@
 .env
 config/db/postgres_env
+.vscode
+.DS_Store
