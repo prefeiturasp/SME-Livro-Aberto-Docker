@@ -1,4 +1,4 @@
-name = 'livro-aberto'
+name = 'livro-aberto-djangoapp'
 loglevel = 'info'
 errorlog = '-'
 accesslog = '-'

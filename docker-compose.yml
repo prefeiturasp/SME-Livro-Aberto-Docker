@@ -20,6 +20,7 @@ services:
     #   - DJANGO_SETTINGS_MODULE=core.settings.base
     volumes:
        - ./data:/opt/services/livro-aberto/src/contratos/data
+       - ./data:/opt/services/livro-aberto/src/regionalizacao/data
       # - livro-aberto-djangoapp-volume:/opt/services/livro-aberto/src
     networks:
       - livro-aberto-db-network
