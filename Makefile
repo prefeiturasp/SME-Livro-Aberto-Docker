@@ -1,17 +1,18 @@
 .PHONY: help clean
 .DEFAULT_GOAL := help
 
-COMMAND = docker-compose run --rm livro-aberto-djangoapp /bin/bash -c
-COMMAND_ON_RUNNING_CONTAINER = docker exec -i -t sme-livro-aberto-docker_livro-aberto-djangoapp_1 /bin/bash -c
+COMMAND = docker-compose run --rm livro-aberto-app /bin/bash -c
+CONTAINER_NAME="sme-livro-aberto-docker_livro-aberto-app_1"
+COMMAND_ON_RUNNING_CONTAINER = docker exec -i -t $(CONTAINER_NAME) /bin/bash -c
 
 
 all: update-submodule setup build install first-migration generate-executions create-super-user run ## Setup and Install the Livro-Aberto APP using Docker.
 
-step1: update-submodule setup build install first-migration
+step1: update-submodule setup build install first-migration run
 
 step2: populate_row_load_with_dump
 
-step3: create-super-user load-data generate-executions run
+step3: create-super-user load-data generate-executions
 
 step4: get-data-contracts generate-executions-contratos
 
@@ -21,7 +22,7 @@ setup: ## Setup the parameters and environment files.
 	/bin/bash config/setup.sh
 
 build: ## Build the Django APP Container from the Dockerfile
-	docker-compose --project-name livro-aberto-djangoapp build --force-rm --no-cache
+	docker-compose --project-name livro-aberto-app build --force-rm --no-cache
 
 install: ## Install and Configure the Containers
 	docker-compose up --no-start
@@ -70,7 +71,7 @@ populate_row_load_with_dump: ## Load raw data with dump pre loaded on the main r
 	$(COMMAND) 'sleep 15; cd /opt/services/livro-aberto/src; pipenv run python manage.py runscript populate_orcamento_empenhos_raw_load_with_dump;'
 
 update_regionalizacao_data: ## Baixa dados das escolas na API EOL, aplica de-paras e gera as execuções
-	$(COMMAND) 'sleep 15; cd /opt/services/livro-aberto/src; pipenv run python manage.py runscript update_regionalizacao_data;'
+	$(COMMAND_ON_RUNNING_CONTAINER) 'sleep 15; cd /opt/services/livro-aberto/src; pipenv run python manage.py runscript update_regionalizacao_data;'
 
 clean: ## Clean all the images, networks and containers unused - WARNING: THIS OPTION WILL REMOVE ALL UNUSED IMAGES, NETWORKS AND CONTAINERS.
 	docker system prune -a
