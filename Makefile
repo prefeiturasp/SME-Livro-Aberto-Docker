@@ -73,6 +73,9 @@ populate_row_load_with_dump: ## Load raw data with dump pre loaded on the main r
 update_regionalizacao_data: ## Baixa dados das escolas na API EOL, aplica de-paras e gera as execuções
 	$(COMMAND_ON_RUNNING_CONTAINER) 'sleep 15; cd /opt/services/livro-aberto/src; pipenv run python manage.py runscript update_regionalizacao_data;'
 
+update_regionalizacao_eol_data: ## Baixa dados das escolas na API EOL sem necessidade de haver upload via admin
+	$(COMMAND_ON_RUNNING_CONTAINER) 'sleep 15; cd /opt/services/livro-aberto/src; pipenv run python manage.py runscript update_regionalizacao_eol_data;'
+
 clean: ## Clean all the images, networks and containers unused - WARNING: THIS OPTION WILL REMOVE ALL UNUSED IMAGES, NETWORKS AND CONTAINERS.
 	docker system prune -a
 
