@@ -76,6 +76,9 @@ update_regionalizacao_data: ## Baixa dados das escolas na API EOL, aplica de-par
 update_regionalizacao_eol_data: ## Baixa dados das escolas na API EOL sem necessidade de haver upload via admin
 	$(COMMAND_ON_RUNNING_CONTAINER) 'sleep 15; cd /opt/services/livro-aberto/src; pipenv run python manage.py runscript update_regionalizacao_data_forced;'
 
+run_new_dres_migration: ## Cria/Altera as DREs Ipiranga e Pirituba/Jaragua para serem por zona
+	$(COMMAND_ON_RUNNING_CONTAINER) 'sleep 15; cd /opt/services/livro-aberto/src; pipenv run python manage.py runscript new_dres_migration;'
+
 clean: ## Clean all the images, networks and containers unused - WARNING: THIS OPTION WILL REMOVE ALL UNUSED IMAGES, NETWORKS AND CONTAINERS.
 	docker system prune -a
 
